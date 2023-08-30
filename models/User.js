@@ -16,6 +16,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  savedLaunches: [{
+    type: Schema.Types.ObjectId, 
+    ref: 'Launch'
+  }]
 });
 
 const User = model("User", userSchema);
