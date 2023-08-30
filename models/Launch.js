@@ -1,6 +1,11 @@
 const { Schema, model } = require("mongoose");
 
 const launchSchema = new Schema({
+  //save launch id from API
+  launchId: {
+    type: String, 
+    required: true
+  },
   launch_name: {
     type: String,
     required: true,
