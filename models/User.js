@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require('bcrypt');
+const Launch = require("./Launch");
 
 const userSchema = new Schema({
   username: {
@@ -17,12 +18,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  savedLaunches: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Launch",
-    },
-  ],
+  savedLaunches: [Launch],
 });
 
 // hash user password

@@ -29,6 +29,4 @@ const launchSchema = new Schema({
   ],
 });
 
-const Launch = model("Launch", launchSchema);
-
-module.exports = Launch;
+module.exports = launchSchema;
