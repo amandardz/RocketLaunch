@@ -11,6 +11,7 @@ const resolvers = {
 
   Mutation: {
     addUser: async (parent, args) => {
+
       const user = await User.create(args);
       const token = signToken(user);
       return {token, user};
@@ -31,6 +32,19 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+    saveLaunch: async (parent, { launchData}, context) => {
+      if(context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id}, 
+          { $push: { savedLaunches: launchData} }, 
+          { new: true }
+        );
+
+        return updatedUser;
+      }
+
+      throw AuthenticationError;
+    }
   },
 };
 
