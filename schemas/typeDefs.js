@@ -37,6 +37,7 @@ const typeDefs = `
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     saveLaunch(launchData: LaunchInput!): User
+    removeLaunch(launchId: ID!): User
   }
 `;
 

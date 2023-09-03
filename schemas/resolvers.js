@@ -1,6 +1,6 @@
 const { User } = require("../models");
 const { signToken } = require("../utils/auth");
-const { AuthenticationError } = require('apollo-server-express');
+const { AuthenticationError } = require("apollo-server-express");
 
 const resolvers = {
   Query: {
@@ -11,10 +11,9 @@ const resolvers = {
 
   Mutation: {
     addUser: async (parent, args) => {
-
       const user = await User.create(args);
       const token = signToken(user);
-      return {token, user};
+      return { token, user };
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
@@ -32,11 +31,11 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    saveLaunch: async (parent, { launchData}, context) => {
-      if(context.user) {
+    saveLaunch: async (parent, { launchData }, context) => {
+      if (context.user) {
         const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id}, 
-          { $push: { savedLaunches: launchData} }, 
+          { _id: context.user._id },
+          { $push: { savedLaunches: launchData } },
           { new: true }
         );
 
@@ -44,7 +43,20 @@ const resolvers = {
       }
 
       throw AuthenticationError;
-    }
+    },
+    removeLaunch: async (parent, { launchId }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { savedLaunches: { launchId } } },
+          { new: true }
+        );
+
+        return updatedUser;
+      }
+
+      throw AuthenticationError;
+    },
   },
 };
 
