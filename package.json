@@ -1,0 +1,26 @@
+{
+  "name": "rocketlaunch",
+  "version": "1.0.0",
+  "description": "## Description RocketLaunch is currently a backend application created with Express, MongoDB, and GraphQL that can be utilized to search for and watch rocket launch events.",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amandardz/RocketLaunch.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amandardz/RocketLaunch/issues"
+  },
+  "homepage": "https://github.com/amandardz/RocketLaunch#readme",
+  "devDependencies": {
+    "concurrently": "^8.2.1"
+  }
+}
