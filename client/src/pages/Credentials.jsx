@@ -1,9 +1,14 @@
-import SignupForm from '../components/CredentialForms/SignupForm';
+import LoginForm from "../components/CredentialForms/LoginForm";
+import SignupForm from "../components/CredentialForms/SignupForm";
+
 
 const Credentials = () => {
   return (
-    <SignupForm />
-  )
+    <>
+      <SignupForm />
+      <LoginForm />
+    </>
+  );
 };
 
 export default Credentials;
