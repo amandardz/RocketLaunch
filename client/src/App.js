@@ -1,23 +1,21 @@
-// import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLInk } from '@apollo/client';
+import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { Outlet } from 'react-router-dom';
 
-// const httpLink = createHttpLInk({
-//   uri: '/graphql', 
-// });
+const httpLink = createHttpLink({
+  uri: '/graphql', 
+});
 
-// const client = new ApolloClient({
-//   link: httpLink, 
-//   cache: new InMemoryCache(), 
-// });
-
-import Home from './pages/Home';
+const client = new ApolloClient({
+  link: httpLink, 
+  cache: new InMemoryCache(), 
+});
 
 function App() {
-  // return (
-  //   <ApolloProvider client={client}>
-  //     <div>Hello World!</div>
-  //   </ApolloProvider>
-  // );
-  return <Home />
+  return (
+    <ApolloProvider client={client}>
+      <Outlet/>
+    </ApolloProvider>
+  );
 };
 
 export default App;
