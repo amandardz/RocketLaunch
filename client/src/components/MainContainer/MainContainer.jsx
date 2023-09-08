@@ -1,4 +1,4 @@
-import "./MainContainer.css";
+import './MainContainer.css';
 
 const MainContainer = ({ children }) => {
   return <main>{children}</main>;
