@@ -1,17 +1,18 @@
+import Card from '../Card/Card.js';
 import './Header.css';
 import { Link } from 'react-router-dom';
-
+import Button from '../Button/Button.js'
 const Header = () => {
   return (
-    <div className='headerCard'>
+    <Card>
       <h1 className='title'>
         <span>Rocket</span> Launch
       </h1>
       <p className='description'>where you can search for rocket launches</p>
       <Link to='/credentials'>
-        <button className='headerBtn'> Login/Signup</button>
+         <Button>Login/Signup</Button>
       </Link>
-    </div>
+    </Card>
   );
 };
 

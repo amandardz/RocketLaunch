@@ -1,11 +1,11 @@
-import MainContainer from '../components/MainContainer/MainContainer';
 import Header from '../components/Header/Header';
+import Card from '../components/Card/Card';
 
 const Home = () => {
   return (
-    <MainContainer>
+    <Card>
       <Header />
-    </MainContainer>
+    </Card>
   );
 };
 

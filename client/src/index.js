@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import Home from './pages/Home';
 import Credentials from './pages/Credentials';
+import Dashboard from './pages/Dashboard';
 import reportWebVitals from './reportWebVitals';
 
 const router = createBrowserRouter([
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: '/credentials', 
         element: <Credentials/>
+      },
+      {
+        path: '/dashboard',
+        element: <Dashboard />
       }
     ]
   },
