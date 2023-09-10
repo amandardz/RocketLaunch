@@ -22,21 +22,13 @@ Coming Soon...
 6. Open terminal in code editor.
 7. Type in terminal <i>npm i</i> or <i>npm install </i> to install dependency packages needed.
 
-*Ensure the following program/IDE/packages are utilized. (To install packages, open the terminal in preferred coder editor and type npm install)*
-
-* Apollo GraphQL Sandbox
-
-* Packages:
-    - express
-    - apollo-server-express
-    - mongoose
-    - graphql
-
 ## Usage
 -  Once dependencies have been installed, user will type *npm run watch* to run server.
 -  User will open Apollo GraphQL Sandbox and utilize it to run queries and mutations available.
 
-![Mutation](./assets/ApolloGraphQLMutation.png)
+![User Mutation](./assets/ApolloGraphQLMutation.png)
+![Save Launch Mutation](./assets/SaveLaunch.png)
+![Remove Launch Mutation](./assets/RemoveLaunch.png)
 
 ## WireFrame
 <img src="./assets/FlowChart.png" width="575" height="500">
