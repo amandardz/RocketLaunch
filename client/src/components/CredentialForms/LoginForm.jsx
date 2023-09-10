@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './Signup.css';
+import Button from '../Button/Button';
 
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
@@ -24,6 +24,9 @@ function LoginForm() {
         variables: { ...userFormData },
       });
       console.log(data);
+      if(data) {
+        window.location.replace('/dashboard');
+      }
     } catch (err) {
       console.error(err);
     }
@@ -56,7 +59,7 @@ function LoginForm() {
           ></input>
         </div>
         <div>
-          <button type='submit'>Login</button>
+          <Button className='credentialsBtn' type='submit'>Login</Button>
         </div>
       </form>
       {error && <div>Login failed</div>}

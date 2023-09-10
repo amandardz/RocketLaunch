@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './Signup.css';
+import Button from '../Button/Button';
 
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../../utils/mutations';
@@ -68,7 +68,7 @@ function SignupForm() {
           ></input>
         </div>
         <div>
-          <button type='submit'>Signup</button>
+          <Button className='credentialsBtn' type='submit'>Signup</Button>
         </div>
       </form>
       {error && <div>Sign up failed</div>}
