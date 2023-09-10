@@ -6,6 +6,7 @@ import App from './App';
 import Home from './pages/Home';
 import Credentials from './pages/Credentials';
 import Dashboard from './pages/Dashboard';
+import SearchLaunch from './pages/SearchLaunch';
 import reportWebVitals from './reportWebVitals';
 
 const router = createBrowserRouter([
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard',
         element: <Dashboard />
+      },
+      {
+        path: '/search',
+        element: <SearchLaunch/>
       }
     ]
   },
