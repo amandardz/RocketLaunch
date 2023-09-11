@@ -1,7 +1,7 @@
 import Card from '../Card/Card';
 import { useState } from 'react';
 
-const SearchForm = () => {
+const SearchForm = ({ getLocationData}) => {
   const [searchInput, setSearchInput] = useState({
     country: '',
     state: '',
@@ -26,7 +26,7 @@ const SearchForm = () => {
     const startDate = new Date(searchInput.start_date).toISOString();
     const endDate = new Date(searchInput.end_date).toISOString();
 
-    console.log(country, state, startDate, endDate);
+    getLocationData(country, state, startDate, endDate);
   }
 
   return (
