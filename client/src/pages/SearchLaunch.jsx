@@ -1,11 +1,7 @@
-import Card from "../components/Card/Card";
+import SearchForm from '../components/SearchForm/SearchForm';
 
 const SearchLaunch = () => {
-  return (
-    <Card>
-      This is the search page
-    </Card>
-  )
+  return <SearchForm />;
 };
 
 export default SearchLaunch;
