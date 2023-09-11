@@ -1,4 +1,4 @@
-import "./Background.css";
+import './Background.css';
 
 const Background = ({ children }) => {
   return <main>{children}</main>;
