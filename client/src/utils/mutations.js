@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const ADD_USER = gql`
   mutation addUser($username: String!, $email: String!, $password: String!) {
@@ -24,3 +24,20 @@ export const LOGIN_USER = gql`
   }
 `;
 
+export const SAVE_LAUNCH = gql`
+  mutation saveLaunch($launchData: LaunchInput!) {
+    saveLaunch(launchData: $launchData) {
+      _id
+      username
+      email
+      savedLaunches {
+        launchId
+        launch_name
+        location
+        start_date
+        end_date
+        videos
+      }
+    }
+  }
+`;
