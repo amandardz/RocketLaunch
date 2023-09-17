@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Credentials from './pages/Credentials';
 import Dashboard from './pages/Dashboard';
 import SearchLaunch from './pages/SearchLaunch';
+import Background from './components/Background/Background';
 import reportWebVitals from './reportWebVitals';
 
 const router = createBrowserRouter([
@@ -38,7 +39,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Background>
+      <RouterProvider router={router} />
+    </Background>
   </React.StrictMode>
 );
 

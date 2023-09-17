@@ -1,4 +1,4 @@
-import Card from '../Card/Card.js';
+import Card from '../Card/Card';
 import './Header.css';
 import { Link } from 'react-router-dom';
 import Button from '../Button/Button.js'

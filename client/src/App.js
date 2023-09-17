@@ -3,12 +3,14 @@ import {
   ApolloClient,
   InMemoryCache,
   createHttpLink,
-} from "@apollo/client";
-import { Outlet } from "react-router-dom";
-import Background from './components/Background/Background';
+} from '@apollo/client';
+import Auth from './utils/auth';
+import Headers from './components/Header/Header';
+import { Outlet } from 'react-router-dom';
+import NavBar from './components/NavBar/NavBar';
 
 const httpLink = createHttpLink({
-  uri: "/graphql",
+  uri: '/graphql',
 });
 
 const client = new ApolloClient({
@@ -19,9 +21,14 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Background>
-        <Outlet />
-      </Background>
+      {!Auth.loggedIn() ? (
+        <Headers />
+      ) : (
+        <>
+          <NavBar />
+          <Outlet />
+        </>
+      )}
     </ApolloProvider>
   );
 }

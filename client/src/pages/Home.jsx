@@ -1,11 +1,14 @@
-import Header from '../components/Header/Header';
-import Card from '../components/Card/Card';
+import { useLocation } from 'react-router-dom';
+import NavBar from '../components/NavBar/NavBar';
+import SearchLaunch from './SearchLaunch';
+import Dashboard from './Dashboard';
 
 const Home = () => {
+  const { pathname } = useLocation();
   return (
-    <Card>
-      <Header />
-    </Card>
+    <>
+      {pathname === 'dashboard' ? <Dashboard />: <SearchLaunch />}
+    </>
   );
 };
 

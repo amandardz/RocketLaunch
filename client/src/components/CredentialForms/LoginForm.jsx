@@ -3,6 +3,7 @@ import Button from '../Button/Button';
 
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
+import Auth from '../../utils/auth';
 
 function LoginForm() {
   const [userFormData, setUserFormData] = useState({
@@ -23,10 +24,8 @@ function LoginForm() {
       const { data } = await login({
         variables: { ...userFormData },
       });
-      console.log(data);
-      if(data) {
-        window.location.replace('/dashboard');
-      }
+      
+      Auth.login(data.login.token);
     } catch (err) {
       console.error(err);
     }

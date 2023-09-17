@@ -3,7 +3,7 @@ import Button from '../Button/Button';
 
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../../utils/mutations';
-
+import Auth from '../../utils/auth';
 function SignupForm() {
   const [userFormData, setUserFormData] = useState({
     username: '',
@@ -24,7 +24,7 @@ function SignupForm() {
       const { data } = await addUser({
         variables: { ...userFormData },
       });
-      console.log(data);
+      Auth.login(data.addUser.token);
     } catch (err) {
       console.error(err);
     }
