@@ -1,10 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useMutation } from '@apollo/client';
+import { SAVE_LAUNCH } from '../utils/mutations';
+import { storeLaunchIds, getStoredLaunchIds } from '../utils/localStorage';
+import Auth from '../utils/auth';
 import SearchForm from '../components/Search/SearchForm';
 import SearchCard from '../components/Search/SearchCard';
 import Card from '../components/Card/Card';
 
 const SearchLaunch = () => {
   const [searchedLaunches, setSearchedLaunches] = useState([]);
+
+  const [savedLaunchIds, setSavedLaunchIds] = useState(getStoredLaunchIds());
+
+  const [saveLaunch, { error }] = useMutation(SAVE_LAUNCH);
+
+  useEffect(() => {
+    return () => storeLaunchIds(savedLaunchIds);
+  });
 
   const getLocationData = async (country, state, startDate, endDate) => {
     const locationIdsArr = [];
@@ -46,7 +58,6 @@ const SearchLaunch = () => {
       const videoLinks = [];
       if (vidURLs.length) {
         vidURLs.forEach((video) => {
-          console.log('video', video);
           videoLinks.push(video.url);
         });
       } else {
@@ -67,11 +78,40 @@ const SearchLaunch = () => {
     setSearchedLaunches(launchData);
   };
 
+  const handleSaveLaunch = async (launchId) => {
+    console.log('launch', launchId)
+    const launchToSave = searchedLaunches.find(
+      (launch) => launch.launchId === launchId
+    );
+    
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if(!token) {
+      return false;
+    }
+
+    try {
+      const { data } = await saveLaunch({
+        variables: { launchData: { ...launchToSave } },
+      });
+
+      setSavedLaunchIds([...savedLaunchIds, launchToSave.launchId]);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <SearchForm getLocationData={getLocationData} />
-      {searchedLaunches.length?<SearchCard launchResults={searchedLaunches}/> : <Card>Please enter Search Critiera</Card>}
-      
+      {searchedLaunches.length ? (
+        <SearchCard
+          launchResults={searchedLaunches}
+          handleSaveLaunch={handleSaveLaunch}
+        />
+      ) : (
+        <Card>Please enter Search Critiera</Card>
+      )}
     </>
   );
 };
