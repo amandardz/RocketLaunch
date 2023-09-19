@@ -5,8 +5,8 @@ import './index.css';
 import App from './App';
 import Home from './pages/Home';
 import Credentials from './pages/Credentials';
-import Dashboard from './pages/Dashboard';
-import SearchLaunch from './pages/SearchLaunch';
+import Dashboard from './components/Dashboard/Dashboard';
+import SearchLaunch from './components/Search/SearchLaunch';
 import Background from './components/Background/Background';
 import reportWebVitals from './reportWebVitals';
 
@@ -16,23 +16,23 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <h1 className='display-2'>Wrong page!</h1>,
     children: [
-      { 
-        index: true, 
-        element: <Home /> 
-      }, 
       {
-        path: '/credentials', 
-        element: <Credentials/>
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: '/credentials',
+        element: <Credentials />,
       },
       {
         path: '/dashboard',
-        element: <Dashboard />
+        element: <Dashboard />,
       },
       {
         path: '/search',
-        element: <SearchLaunch/>
-      }
-    ]
+        element: <SearchLaunch />,
+      },
+    ],
   },
 ]);
 
