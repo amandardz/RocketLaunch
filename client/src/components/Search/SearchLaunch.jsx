@@ -6,6 +6,7 @@ import Auth from '../../utils/auth';
 import SearchForm from './SearchForm';
 import SearchCard from './SearchCard';
 import Card from '../Card/Card';
+import NavBar from '../NavBar/NavBar';
 
 const SearchLaunch = () => {
   const [searchedLaunches, setSearchedLaunches] = useState([]);
@@ -79,14 +80,14 @@ const SearchLaunch = () => {
   };
 
   const handleSaveLaunch = async (launchId) => {
-    console.log('launch', launchId)
+    console.log('launch', launchId);
     const launchToSave = searchedLaunches.find(
       (launch) => launch.launchId === launchId
     );
-    
+
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-    if(!token) {
+    if (!token) {
       return false;
     }
 
@@ -94,7 +95,7 @@ const SearchLaunch = () => {
       const { data } = await saveLaunch({
         variables: { launchData: { ...launchToSave } },
       });
-
+      
       setSavedLaunchIds([...savedLaunchIds, launchToSave.launchId]);
     } catch (err) {
       console.log(err);
@@ -103,6 +104,7 @@ const SearchLaunch = () => {
 
   return (
     <>
+      <NavBar />
       <SearchForm getLocationData={getLocationData} />
       {searchedLaunches.length ? (
         <SearchCard
