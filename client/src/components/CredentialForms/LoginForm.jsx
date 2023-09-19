@@ -26,6 +26,7 @@ function LoginForm() {
       });
       
       Auth.login(data.login.token);
+      window.location.assign('/dashboard');
     } catch (err) {
       console.error(err);
     }
