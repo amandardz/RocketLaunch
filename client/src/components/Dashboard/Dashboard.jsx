@@ -14,6 +14,19 @@ const Dashboard = () => {
       <NavBar />
       <Card>
         <h1>Welcome {userData.username}</h1>
+        <Card>
+          <h2>These are your saved launches</h2>
+          {userData.savedLaunches?.map((savedLaunch) => { return(
+            <>
+            <p>{savedLaunch.name}</p>
+            <p>{savedLaunch.location}</p>
+            <p>{savedLaunch.start_date}</p>
+            <p>{savedLaunch.end_date}</p>
+            <p>{savedLaunch.videos}</p>
+            <Button>Delete Launch</Button>
+            </>)
+          })}
+         </Card>
       </Card>;
     </>
   );
