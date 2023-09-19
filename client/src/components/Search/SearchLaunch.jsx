@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
-import { SAVE_LAUNCH } from '../utils/mutations';
-import { storeLaunchIds, getStoredLaunchIds } from '../utils/localStorage';
-import Auth from '../utils/auth';
-import SearchForm from '../components/Search/SearchForm';
-import SearchCard from '../components/Search/SearchCard';
-import Card from '../components/Card/Card';
+import { SAVE_LAUNCH } from '../../utils/mutations';
+import { storeLaunchIds, getStoredLaunchIds } from '../../utils/localStorage';
+import Auth from '../../utils/auth';
+import SearchForm from './SearchForm';
+import SearchCard from './SearchCard';
+import Card from '../Card/Card';
 
 const SearchLaunch = () => {
   const [searchedLaunches, setSearchedLaunches] = useState([]);
