@@ -41,3 +41,21 @@ export const SAVE_LAUNCH = gql`
     }
   }
 `;
+
+export const REMOVE_LAUNCH = gql`
+mutation removeLaunch($launchId: ID!) {
+  removeLaunch(launchId: $launchId) {
+    _id
+    username
+    email
+    savedLaunches {
+      launchId
+      launch_name
+      location
+      start_date
+      end_date
+      videos
+    }
+  }
+}
+`
