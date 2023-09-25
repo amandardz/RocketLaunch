@@ -1,6 +1,8 @@
-import Card from '../Card/Card';
+import Container from '../Container/Container';
 import NavBar from '../NavBar/NavBar';
 import Button from '../Button/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons';
 
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_USER } from '../../utils/queries';
@@ -8,6 +10,8 @@ import { REMOVE_LAUNCH } from '../../utils/mutations';
 import { removeLaunchId } from '../../utils/localStorage';
 
 import Auth from '../../utils/auth';
+import Credentials from '../../pages/Credentials';
+import SearchLaunch from '../Search/SearchLaunch';
 
 const Dashboard = () => {
   const { loading, data } = useQuery(QUERY_USER);
@@ -15,7 +19,39 @@ const Dashboard = () => {
 
   const userData = data?.user || {};
 
-  console.log(userData);
+  const handleUsername = (username) => {
+    const capializedName = username.charAt(0).toUpperCase() + username.slice(1);
+    return capializedName;
+  };
+
+  const handleDate = (start, end) => {
+    const options = {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    };
+    const startDate = new Date(parseInt(start)).toLocaleDateString(
+      'en-US',
+      options
+    );
+    const endDate = new Date(parseInt(end)).toLocaleDateString(
+      'en-US',
+      options
+    );
+    if (startDate === endDate) {
+      return startDate;
+    }
+    return `${startDate} - ${endDate}`;
+  };
+
+  const handleVideo = (videoLink) => {
+    const pattern = /[^=]*.$/gm;
+    const videoId = videoLink[0].match(pattern);
+    const embedVideoLink = `https://www.youtube.com/embed/${videoId}?mute=1`;
+    return embedVideoLink;
+  };
 
   const handleDeleteLaunch = async (launchId) => {
     const token = Auth.loggedIn ? Auth.getToken() : null;
@@ -37,33 +73,83 @@ const Dashboard = () => {
 
   return (
     <>
-      <NavBar />
-      <Card key={userData._id}>
-        <h1>Welcome, {userData.username}</h1>
-          {!userData.savedLaunches? (
-            <>
-              <h2>Search for a launch to begin.</h2>
-              <p>The launches you save will display here.</p>
-            </>
-          ) : (
-            userData.savedLaunches.map((savedLaunch) => {
-              return (
-                <Card key={savedLaunch.launchId}>
-                  <p>{savedLaunch.name}</p>
-                  <p>{savedLaunch.location}</p>
-                  <p>{savedLaunch.start_date}</p>
-                  <p>{savedLaunch.end_date}</p>
-                  <p>{savedLaunch.videos}</p>
-                  <Button
-                    onClick={() => handleDeleteLaunch(savedLaunch.launchId)}
-                  >
-                    Delete Launch
-                  </Button>
-                </Card>
-              );
-            })
-          )}
-      </Card>
+      {!Auth.loggedIn() ? (
+        <>
+          <Container className='text-white text-center'>
+            Please log in to access Dashboard.
+          </Container>
+          <Credentials />
+        </>
+      ) : (
+        <>
+          <NavBar />
+          <Container className='bg-space-blue mt-2 w-10/12 m-auto rounded-md'>
+            <Container className='p-7 flex flex-col items-center justify-center'>
+              <Container className='text-center text-white text-2xl font-medium'>
+                <div className='flex justify-center'>
+                  <p className='mr-2'>Welcome,</p>
+                  <p>
+                    <FontAwesomeIcon
+                      icon={faUserAstronaut}
+                      style={{ color: '#ffffff' }}
+                      className='mr-2'
+                    />
+                    Astronaut{' '}
+                    {userData.username ? handleUsername(userData.username) : ''}{' '}
+                  </p>
+                </div>
+                <p>Here you will find all of the launches you've saved:</p>
+              </Container>
+              <Container>
+                {!userData.savedLaunches ||
+                userData.savedLaunches.length === 0 ? (
+                  <>
+                    <p className='text-orange text-xl text-center'>
+                      There are no launches saved. Search for a launch to begin.
+                    </p>
+                  </>
+                ) : (
+                  userData.savedLaunches.map((savedLaunch) => {
+                    return (
+                      <Container
+                        key={savedLaunch.launchId}
+                        className=' bg-white mt-2 p-4 rounded-md'
+                      >
+                        <iframe
+                          title={savedLaunch.launch_name}
+                          className='m-auto'
+                          src={handleVideo(savedLaunch.videos)}
+                        ></iframe>
+                        <div className='flex flex-row justify-between'>
+                          <div>
+                            <p className='font-bold'>
+                              {savedLaunch.launch_name}
+                            </p>
+                            <p className='italic'>{savedLaunch.location}</p>
+                          </div>
+                          <p>
+                            {handleDate(
+                              savedLaunch.start_date,
+                              savedLaunch.end_date
+                            )}
+                          </p>
+                        </div>
+                        <Button
+                          onClick={() =>
+                            handleDeleteLaunch(savedLaunch.launchId)
+                          }
+                        >
+                          Delete Launch
+                        </Button>
+                      </Container>
+                    );
+                  })
+                )}
+              </Container>
+            </Container>
+          </Container>
+        </>
+      )}
       ;
     </>
   );

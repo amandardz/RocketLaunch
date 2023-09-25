@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
-import Card from '../Card/Card';
+import Container from '../Container/Container';
 import Auth from '../../utils/auth';
 
 const NavBar = () => {
   return (
-    <Card>
-      <nav>
-        <Link to='/search'>Search</Link>
-        <Link to='/dashboard'>Dashboard</Link>
-        <Link onClick={Auth.logout}>Logout</Link>
+    <Container className='z-10 sticky top-0 p-3 bg-space-blue'>
+      <nav className='text-white text-xl flex justify-around'>
+        <Link className='hover:underline hover:decoration-dotted' to='/search'>Search</Link>
+        <Link className='hover:underline hover:decoration-dotted' to='/dashboard'>Dashboard</Link>
+        {!Auth.loggedIn() ? <Link className='hover:underline hover:decoration-dotted' to='/credentials'>Login</Link> : <Link className='hover:underline hover:decoration-dotted' onClick={Auth.logout}>Logout</Link>}
       </nav>
-    </Card>
+    </Container>
   );
 };
 

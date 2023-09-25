@@ -1,7 +1,8 @@
-import Card from '../Card/Card';
+import Container from '../Container/Container';
+import Button from '../Button/Button';
 import { useState } from 'react';
 
-const SearchForm = ({ getLocationData}) => {
+const SearchForm = ({ getLocationData }) => {
   const [searchInput, setSearchInput] = useState({
     country: '',
     state: '',
@@ -27,56 +28,72 @@ const SearchForm = ({ getLocationData}) => {
     const endDate = new Date(searchInput.end_date).toISOString();
 
     getLocationData(country, state, startDate, endDate);
-  }
+  };
 
   return (
-  <form onSubmit={handleFormSubmit}>
-    <Card>
-      <div>
-        <label htmlFor='location'>Search by Location</label>
-        <input
-          type='text'
-          name='state'
-          value={searchInput.state}
-          onChange={handleInputChange}
-          placeholder='State Abbreviation'
-          required
-        />
-        <input
-          type='text'
-          name='country'
-          value={searchInput.country}
-          onChange={handleInputChange}
-          placeholder='Country Abbreviation'
-          required
-        />
-      </div>
-      <div>
+    <Container className='mx-auto my-2 bg-space-blue md:w-7/12 rounded-md'>
+      <form className='flex flex-col items-center p-1' onSubmit={handleFormSubmit}>
         <div>
-          <label htmlFor='start-date'>Start Date</label>
-          <input
-            type='date'
-            name='start_date'
-            value={searchInput.start_date}
-            onChange={handleInputChange}
-            required
-          />
+          <div>
+            <div className='flex flex-col items-center'>
+              <label className='text-xl text-white mb-2' htmlFor='location'>
+                Search by Location
+              </label>
+              <div>
+                <input
+                  className='rounded-md placeholder: italic mr-2'
+                  type='text'
+                  name='state'
+                  value={searchInput.state.toUpperCase()}
+                  onChange={handleInputChange}
+                  placeholder='State Abbreviation'
+                  required
+                />
+                <input
+                  className='rounded-md placeholder: italic'
+                  type='text'
+                  name='country'
+                  value={searchInput.country.toUpperCase()}
+                  onChange={handleInputChange}
+                  placeholder='Country Abbreviation'
+                  required
+                />
+              </div>
+            </div>
+            <div className='mt-2 w-full flex justify-around'>
+              <label className='text-xl text-white mr-5' htmlFor='start-date'>
+                Start Date
+              </label>
+              <input
+                className='rounded-md placeholder: italic'
+                type='date'
+                name='start_date'
+                value={searchInput.start_date}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className='mt-2 w-full flex justify-around'>
+              <label className='text-xl text-white mr-5' htmlFor='end-date'>
+                End Date
+              </label>
+              <input
+                className='rounded-md placeholder: italic'
+                type='date'
+                name='end_date'
+                value={searchInput.end_date}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+          </div>
+          <Button className='blueBtn text-white' type='submit'>
+            Submit
+          </Button>
         </div>
-        <div>
-          <label htmlFor='end-date'>End Date</label>
-          <input
-            type='date'
-            name='end_date'
-            value={searchInput.end_date}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-      </div>
-      <button type='submit'>Submit</button>
-    </Card>
-  </form>
-  )
+      </form>
+    </Container>
+  );
 };
 
 export default SearchForm;

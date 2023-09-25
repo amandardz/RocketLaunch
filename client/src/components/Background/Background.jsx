@@ -1,7 +1,7 @@
 import './Background.css';
 
 const Background = ({ children }) => {
-  return <main>{children}</main>;
+  return <div className='background h-screen'>{children}</div>;
 };
 
 export default Background;

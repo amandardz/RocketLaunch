@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Button from '../Button/Button';
-
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth';
@@ -32,11 +31,12 @@ function SignupForm() {
 
   return (
     <>
-      <form id='signup-form' onSubmit={(e) => handleFormSubmit(e)}>
-        <h2>Signup</h2>
-        <div>
-          <label htmlFor='email-signup'>Email address</label>
+      <form className='p-5' id='signup-form' onSubmit={(e) => handleFormSubmit(e)}>
+        <p className='text-center text-3xl text-white'>Signup</p>
+        <div className='p-1'>
+          <label className='text-xl text-white' htmlFor='email-signup'>Email address</label>
           <input
+          className='rounded-md w-full'
             type='email'
             id='email-signup'
             onChange={handleInputChange}
@@ -45,9 +45,10 @@ function SignupForm() {
             required
           ></input>
         </div>
-        <div>
-          <label htmlFor='username-signup'>Username</label>
+        <div className='p-1'>
+          <label className='text-xl text-white' htmlFor='username-signup'>Username</label>
           <input
+          className='rounded-md w-full'
             type='text'
             id='username-signup'
             onChange={handleInputChange}
@@ -56,9 +57,10 @@ function SignupForm() {
             required
           ></input>
         </div>
-        <div>
-          <label htmlFor='password-signup'>Password</label>
+        <div className='p-1'>
+          <label className='text-xl text-white' htmlFor='password-signup'>Password</label>
           <input
+          className='rounded-md w-full'
             type='password'
             id='password-signup'
             onChange={handleInputChange}
@@ -67,11 +69,11 @@ function SignupForm() {
             required
           ></input>
         </div>
-        <div>
-          <Button className='credentialsBtn' type='submit'>Signup</Button>
+        <div className='p-1'>
+          <Button className='blueBtn text-white' type='submit'>Signup</Button>
         </div>
       </form>
-      {error && <div>Sign up failed</div>}
+      {error && <div className='text-white text-center'>Sign up failed</div>}
     </>
   );
 }

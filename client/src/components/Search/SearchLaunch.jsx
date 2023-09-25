@@ -5,8 +5,9 @@ import { storeLaunchIds, getStoredLaunchIds } from '../../utils/localStorage';
 import Auth from '../../utils/auth';
 import SearchForm from './SearchForm';
 import SearchCard from './SearchCard';
-import Card from '../Card/Card';
+import Container from '../Container/Container';
 import NavBar from '../NavBar/NavBar';
+import Credentials from '../../pages/Credentials';
 
 const SearchLaunch = () => {
   const [searchedLaunches, setSearchedLaunches] = useState([]);
@@ -80,7 +81,6 @@ const SearchLaunch = () => {
   };
 
   const handleSaveLaunch = async (launchId) => {
-    console.log('launch', launchId);
     const launchToSave = searchedLaunches.find(
       (launch) => launch.launchId === launchId
     );
@@ -95,7 +95,7 @@ const SearchLaunch = () => {
       const { data } = await saveLaunch({
         variables: { launchData: { ...launchToSave } },
       });
-      
+
       setSavedLaunchIds([...savedLaunchIds, launchToSave.launchId]);
     } catch (err) {
       console.log(err);
@@ -104,15 +104,31 @@ const SearchLaunch = () => {
 
   return (
     <>
-      <NavBar />
-      <SearchForm getLocationData={getLocationData} />
-      {searchedLaunches.length ? (
-        <SearchCard
-          launchResults={searchedLaunches}
-          handleSaveLaunch={handleSaveLaunch}
-        />
+      {!Auth.loggedIn() ? (
+        <>
+          <Container className='text-white text-center bg-space-blue'>
+            Please log in to search for launches.
+          </Container>
+          <Credentials />
+        </>
       ) : (
-        <Card>Please enter Search Critiera</Card>
+        <>
+          <NavBar />
+          <SearchForm getLocationData={getLocationData} />
+          {searchedLaunches.length ? (
+          <Container className='h-100 bg-space-blue mt-2 mx-auto flex flex-row justify-evenly flex-wrap md:w-11/12 rounded-md'>
+            <SearchCard
+              launchResults={searchedLaunches}
+              handleSaveLaunch={handleSaveLaunch}
+            />
+
+          </Container>
+          ) : (
+            <Container className='mt-5 text-white flex justify-center bg-space-blue'>
+              Please enter Search Critiera
+            </Container>
+          )}
+        </>
       )}
     </>
   );

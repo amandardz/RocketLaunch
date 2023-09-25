@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Button from '../Button/Button';
-
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth';
@@ -24,7 +23,7 @@ function LoginForm() {
       const { data } = await login({
         variables: { ...userFormData },
       });
-      
+
       Auth.login(data.login.token);
       window.location.assign('/dashboard');
     } catch (err) {
@@ -34,11 +33,12 @@ function LoginForm() {
 
   return (
     <>
-      <form id='login-form' onSubmit={(e) => handleFormSubmit(e)}>
-        <h2>Login</h2>
-        <div>
-          <label htmlFor='email-login'>Email address</label>
+      <form className='p-5' id='login-form'  onSubmit={(e) => handleFormSubmit(e)}>
+        <p className='p-2 text-3xl text-center text-white'>Login</p>
+        <div className='p-1'>
+          <label className='text-xl text-white' htmlFor='email-login'>Email address</label>
           <input
+            className='rounded-md w-full'
             type='email'
             id='email-login'
             onChange={handleInputChange}
@@ -47,9 +47,10 @@ function LoginForm() {
             required
           ></input>
         </div>
-        <div>
-          <label htmlFor='password-login'>Password</label>
+        <div className='p-1'>
+          <label className='text-xl text-white' htmlFor='password-login'>Password</label>
           <input
+          className='rounded-md w-full'
             type='password'
             id='password-login'
             onChange={handleInputChange}
@@ -58,11 +59,13 @@ function LoginForm() {
             required
           ></input>
         </div>
-        <div>
-          <Button className='credentialsBtn' type='submit'>Login</Button>
+        <div className='p-1'>
+          <Button className='blueBtn text-white' type='submit'>
+            Login
+          </Button>
         </div>
       </form>
-      {error && <div>Login failed</div>}
+      {error && <div className='text-white text-center'>Login failed</div>}
     </>
   );
 }
