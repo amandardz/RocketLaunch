@@ -24,7 +24,7 @@ const SearchLaunch = () => {
     const locationIdsArr = [];
 
     const locationResponse = await fetch(
-      `https://ll.thespacedevs.com/2.2.0/location/?country_code=${country}&name__contains=${state}`
+      `https://ll.thespacedevs.com/2.2.0/location/?country_code=${country}&search=${state}`
     );
 
     if (!locationResponse.ok) {
@@ -33,21 +33,20 @@ const SearchLaunch = () => {
 
     const { results } = await locationResponse.json();
 
-    if (results.length === 0) {
+    if (results.count === 0) {
       return 'No data available with that search criteria';
     } else {
       for (let i = 0; i < results.length; i++) {
         locationIdsArr.push(results[i].id);
       }
     }
-
     getLaunchData(locationIdsArr, startDate, endDate);
   };
 
   const getLaunchData = async (locationIdsArr, startDate, endDate) => {
     const locationIds = locationIdsArr.join();
     const launchReponse = await fetch(
-      `https://ll.thespacedevs.com/2.2.0/launch/?mode=detailed&launcher_config__id=${locationIds}&window_end__lte=${endDate}&window_start__gte=${startDate}`
+      `https://ll.thespacedevs.com/2.2.0/launch/?mode=detailed&launcher_config__id=${locationIds}&window_start__gte=${startDate}&window_end__lte=${endDate}`
     );
 
     if (!launchReponse.ok) {
@@ -72,11 +71,11 @@ const SearchLaunch = () => {
       launchId: launch.id,
       launch_name: launch.name,
       location: launch.pad.location.name,
-      start_date: launch.window_start,
-      end_date: launch.window_end,
+      start_date: new Date(launch.window_start).toLocaleString('en-US'),
+      end_date: new Date(launch.window_end).toLocaleString('en-US'),
       videos: getVideo(launch.vidURLs),
     }));
-
+    
     setSearchedLaunches(launchData);
   };
 

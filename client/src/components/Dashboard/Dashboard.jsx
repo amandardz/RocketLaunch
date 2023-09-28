@@ -24,28 +24,6 @@ const Dashboard = () => {
     return capializedName;
   };
 
-  const handleDate = (start, end) => {
-    const options = {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-    };
-    const startDate = new Date(parseInt(start)).toLocaleDateString(
-      'en-US',
-      options
-    );
-    const endDate = new Date(parseInt(end)).toLocaleDateString(
-      'en-US',
-      options
-    );
-    if (startDate === endDate) {
-      return startDate;
-    }
-    return `${startDate} - ${endDate}`;
-  };
-
   const handleVideo = (videoLink) => {
     const pattern = /[^=]*.$/gm;
     const videoId = videoLink[0].match(pattern);
@@ -113,14 +91,14 @@ const Dashboard = () => {
                     return (
                       <Container
                         key={savedLaunch.launchId}
-                        className=' bg-white mt-2 p-4 rounded-md'
+                        className='bg-white mt-2 p-4 rounded-md'
                       >
                         <iframe
                           title={savedLaunch.launch_name}
                           className='m-auto'
                           src={handleVideo(savedLaunch.videos)}
                         ></iframe>
-                        <div className='flex flex-row justify-between'>
+                        <div className='flex flex-col justify-between text-center'>
                           <div>
                             <p className='font-bold'>
                               {savedLaunch.launch_name}
@@ -128,10 +106,16 @@ const Dashboard = () => {
                             <p className='italic'>{savedLaunch.location}</p>
                           </div>
                           <p>
-                            {handleDate(
-                              savedLaunch.start_date,
-                              savedLaunch.end_date
-                            )}
+                            <span className='font-bold'>Start</span>:{' '}
+                            {new Date(
+                              parseInt(savedLaunch.start_date)
+                            ).toLocaleString('en-US')}
+                          </p>
+                          <p>
+                            <span className='font-bold'>End</span>:{' '}
+                            {new Date(
+                              parseInt(savedLaunch.end_date)
+                            ).toLocaleString('en-US')}
                           </p>
                         </div>
                         <Button
