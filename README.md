@@ -1,17 +1,17 @@
-# RocketLaunch (Work in Progress ...)
+# RocketLaunch
 
 ## Description
-RocketLaunch is currently a backend application created with Express, MongoDB, and GraphQL that can be utilized to search for and watch rocket launch events.
+RocketLaunch is a full stack application created with MongoDB, Express, React, Node, and GraphQL that can be utilized to search for and watch rocket launches.
 
 ## Video Demonstration
-<!-- Click on the image to view video <br> -->
-<!-- [![Video Demonstration](https://img.youtube.com/vi/videoid/0.jpg)](https://www.youtube.com/watch?v=videoid) -->
-Coming Soon...
+Click on the image to view video <br>
+<a href="https://www.youtube.com/watch?v=9kTWk4kgLog" target='_blank'>[![Video Demonstration](https://img.youtube.com/vi/9kTWk4kgLog/maxresdefault.jpg)](https://www.youtube.com/watch?v=9kTWk4kgLog)</a>
 
 ## Table of Contents
 * [Installation](#installation)
 * [Usage](#usage)
-* [License](#license)
+* [Apollo/GraphQL](#apollographql)
+* [Wireframe](#wireframe)
 
 ## Installation
 1. Copy the clone link of the repository from GitHub.
@@ -21,19 +21,28 @@ Coming Soon...
 5. Open repository in preferred code editor.
 6. Open terminal in code editor.
 7. Type in terminal <i>npm i</i> or <i>npm install </i> to install dependency packages needed.
+8. Once all dependencies have been installed, run <i>npm run develop</i> to run the front and back end of the application.
+
+[⬆ Back to top](#table-of-contents)
 
 ## Usage
--  Once dependencies have been installed, user will type *npm run watch* to run server.
--  User will open Apollo GraphQL Sandbox and utilize it to run queries and mutations available.
+- Click on the Login/Signup button to gain access to the site. 
+- Once logged in, the dashboard page will be presented. This is where the saved launches will be stored for later view. 
+- Click on the search on the navigation bar to direct to the search page where launches can be searched. 
+- Once the search criteria has been entered, the results will populate. Click on the save button to save launch to dashboard page.
 
+[⬆ Back to top](#table-of-contents)
+
+## Apollo/GraphQL
 ![User Mutation](./assets/ApolloGraphQLMutation.png)
 ![Save Launch Mutation](./assets/SaveLaunch.png)
 ![Remove Launch Mutation](./assets/RemoveLaunch.png)
+
+[⬆ Back to top](#table-of-contents)
 
 ## WireFrame
 <img src="./assets/FlowChart.png" width="575" height="500">
 
 ![WireFrame](./assets/RocketLaunchWireframe.png)
 
-## License
-<a href="https://choosealicense.com/licenses/gpl-3.0/">![Static Badge](https://img.shields.io/badge/LICENSE-GPL3.0-58a2da)</a>
+[⬆ Back to top](#table-of-contents)
