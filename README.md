@@ -5,7 +5,8 @@ RocketLaunch is a full stack application created with MongoDB, Express, React, N
 
 ## Video Demonstration
 Click on the image to view video <br>
-<a href="https://www.youtube.com/watch?v=gWLvB0wtslE" target='_blank'>[![Video Demonstration](https://img.youtube.com/vi/9kTWk4kgLog/maxresdefault.jpg)](https://www.youtube.com/watch?v=gWLvB0wtslE)</a>
+<a href="https://www.youtube.com/watch?v=gWLvB0wtslE" target='_blank'>[![Video Demonstration](https://img.youtube.com/vi/gWLvB0wtslE/0.jpg)](https://www.youtube.com/watch?v=gWLvB0wtslE)
+</a>
 
 ## Table of Contents
 * [Installation](#installation)
